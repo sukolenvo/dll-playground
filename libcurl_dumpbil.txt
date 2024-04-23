@@ -1,0 +1,64 @@
+Section contains the following exports for libcurl.dll
+
+    00000000 characteristics
+    4298356B time date stamp Sat May 28 17:10:03 2005
+        0.00 version
+           1 ordinal base
+          46 number of functions
+          46 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00015F20 curl_easy_cleanup
+          2    1 00015F70 curl_easy_duphandle
+          3    2 00015F50 curl_easy_getinfo
+          4    3 00015DE0 curl_easy_init
+          5    4 00015EB0 curl_easy_perform
+          6    5 00016140 curl_easy_reset
+          7    6 00015E60 curl_easy_setopt
+          8    7 00019BA0 curl_easy_strerror
+          9    8 00010300 curl_escape
+         10    9 000032B0 curl_formadd
+         11    A 00003470 curl_formfree
+         12    B 000104B0 curl_free
+         13    C 0001B0A0 curl_getdate
+         14    D 000102F0 curl_getenv
+         15    E 00015DA0 curl_global_cleanup
+         16    F 00015CA0 curl_global_init
+         17   10 00015D20 curl_global_init_mem
+         18   11 000116A0 curl_maprintf
+         19   12 00011810 curl_mfprintf
+         20   13 000117F0 curl_mprintf
+         21   14 00010BA0 curl_msnprintf
+         22   15 000117C0 curl_msprintf
+         23   16 00017540 curl_multi_add_handle
+         24   17 00017DB0 curl_multi_cleanup
+         25   18 00017680 curl_multi_fdset
+         26   19 00017E40 curl_multi_info_read
+         27   1A 000174F0 curl_multi_init
+         28   1B 000177F0 curl_multi_perform
+         29   1C 000175E0 curl_multi_remove_handle
+         30   1D 00019E50 curl_multi_strerror
+         31   1E 00011730 curl_mvaprintf
+         32   1F 00011880 curl_mvfprintf
+         33   20 00011860 curl_mvprintf
+         34   21 00010B40 curl_mvsnprintf
+         35   22 00011830 curl_mvsprintf
+         36   23 00018520 curl_share_cleanup
+         37   24 000183B0 curl_share_init
+         38   25 000183E0 curl_share_setopt
+         39   26 00019EB0 curl_share_strerror
+         40   27 000070C0 curl_slist_append
+         41   28 00007120 curl_slist_free_all
+         42   29 00015B00 curl_strequal
+         43   2A 00015B20 curl_strnequal
+         44   2B 000103E0 curl_unescape
+         45   2C 000101D0 curl_version
+         46   2D 00010260 curl_version_info
+
+  Summary
+
+        3000 .data
+        8000 .rdata
+        3000 .reloc
+       2C000 .text
