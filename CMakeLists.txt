@@ -12,6 +12,9 @@ if (DLL_PLAYGROUND_WARNINGS_AS_ERRORS)
 endif ()
 
 add_subdirectory(src)
+add_subdirectory(vendor/detours)
+add_subdirectory(vendor/imgui)
+add_subdirectory(vendor/kiero)
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(FetchContent)
