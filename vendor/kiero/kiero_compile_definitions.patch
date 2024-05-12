@@ -1,0 +1,26 @@
+Subject: [PATCH] kiero_compile_definitions
+---
+Index: kiero.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/kiero.h b/kiero.h
+--- a/kiero.h	(revision d5520a5872b97f30b6d6407a42d3b11b859588d3)
++++ b/kiero.h	(date 1715481483809)
+@@ -5,13 +5,13 @@
+ 
+ #define KIERO_VERSION "1.2.12"
+ 
+-#define KIERO_INCLUDE_D3D9   0 // 1 if you need D3D9 hook
++#define KIERO_INCLUDE_D3D9   1 // 1 if you need D3D9 hook
+ #define KIERO_INCLUDE_D3D10  0 // 1 if you need D3D10 hook
+ #define KIERO_INCLUDE_D3D11  0 // 1 if you need D3D11 hook
+ #define KIERO_INCLUDE_D3D12  0 // 1 if you need D3D12 hook
+ #define KIERO_INCLUDE_OPENGL 0 // 1 if you need OpenGL hook
+ #define KIERO_INCLUDE_VULKAN 0 // 1 if you need Vulkan hook
+-#define KIERO_USE_MINHOOK    0 // 1 if you will use kiero::bind function
++#define KIERO_USE_MINHOOK    1 // 1 if you will use kiero::bind function
+ 
+ #define KIERO_ARCH_X64 0
+ #define KIERO_ARCH_X86 0

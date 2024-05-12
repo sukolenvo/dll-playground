@@ -5,6 +5,10 @@ Inject DLL to extend application functionality.
 Display current move point in Heroes of Might and Magic 5 as number additionally to progress bar.
 ![](screenshot.jpg)
 
+### Build
+
+Cmake with flags `-G "Visual Studio 17 2022" -A Win32`
+
 ### Known limitations
 
 Switching between fullscreen mode and window mode requires app restart.
@@ -14,6 +18,11 @@ Switching between fullscreen mode and window mode requires app restart.
 Add dll to executable import table:
 ```powershell
 setdll.exe /d:h5-extension.dll 'path-to-exe\H5_Game.exe'
+```
+
+Restore dll import table to original:
+```powershell
+setdll.exe /r 'path-to-exe\H5_Game.exe'
 ```
 
 Run process with dll loaded at runtime:
