@@ -7,7 +7,6 @@
 #include "hook_d3d9.hpp"
 #include "main.hpp"
 
-
 bool createConsole()
 {
     if (AllocConsole() == 0)
@@ -17,6 +16,7 @@ bool createConsole()
     }
     FILE* fp;
     freopen_s(&fp, "CONOUT$", "w", stdout);
+    std::cout << "Console created" << std::endl;
     return true;
 }
 

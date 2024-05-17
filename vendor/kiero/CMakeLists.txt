@@ -3,7 +3,7 @@ FetchContent_Declare(
     kiero
     GIT_REPOSITORY https://github.com/Rebzzel/kiero.git
     GIT_TAG 177c3cf43a1b1be2651dba2a1acb3b334899ead7
-    PATCH_COMMAND git apply ${CMAKE_CURRENT_SOURCE_DIR}/kiero_compile_definitions.patch
+    PATCH_COMMAND git apply --reverse --check ${CMAKE_CURRENT_SOURCE_DIR}/kiero_compile_definitions.patch || cmd /c exit /b 0 && git apply ${CMAKE_CURRENT_SOURCE_DIR}/kiero_compile_definitions.patch
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
 )

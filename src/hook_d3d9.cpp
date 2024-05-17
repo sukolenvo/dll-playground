@@ -54,7 +54,8 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
     ImGui::NewFrame();
 
     ImGuiIO& io = ImGui::GetIO();
-    ImVec2 window_pos = ImVec2(io.DisplaySize.x * 0.18, io.DisplaySize.y * 0.77);
+    auto offset = min(io.DisplaySize.x * 0.2, io.DisplaySize.y * 0.28);
+    ImVec2 window_pos = ImVec2(offset * 1.08, io.DisplaySize.y - offset * 0.86);
     ImVec2 window_pos_pivot = ImVec2(0.0f, 1.0f);
     ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
     ImGui::SetNextWindowBgAlpha(0.0F); // Transparent background
@@ -63,7 +64,11 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
         ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize
             | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
     {
-        ImGui::Text("%d", get_current_moves());
+        if (get_path_length() > 0) {
+            ImGui::Text("%d / %d", get_path_length(), get_current_moves());
+        } else {
+            ImGui::Text("%d", get_current_moves());
+        }
     }
 
     ImGui::EndFrame();

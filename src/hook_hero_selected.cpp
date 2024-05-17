@@ -5,6 +5,7 @@
 
 #include <windows.h>
 
+#include "asm_tools.hpp"
 #include "hook_hero_selected.hpp"
 
 intptr_t hero_select_addr = 0x00C09C20;
@@ -18,28 +19,16 @@ struct Hero
 };
 
 int current_moves = -1;
+int** path_details;
 
 void* __stdcall my_on_hero_selected(void* hero)
 {
     Hero* self;
     __asm mov self, ecx
+    __asm mov path_details, edi
     void* result = trampoline_on_hero_selected(self, hero);
     current_moves = self->moves;
     return result;
-}
-
-void write_jmp(void* from, void* to)
-{
-    intptr_t distance = reinterpret_cast<intptr_t>(to) - 5 - reinterpret_cast<intptr_t>(from);
-    auto i = reinterpret_cast<unsigned char*>(from);
-    *i++ = 0xe9;
-    *i++ = distance & 0xff;
-    distance >>= 8;
-    *i++ = distance & 0xff;
-    distance >>= 8;
-    *i++ = distance & 0xff;
-    distance >>= 8;
-    *i = distance & 0xff;
 }
 
 bool setup_hero_select_hook()
@@ -80,4 +69,21 @@ bool setup_hero_select_hook()
 int get_current_moves()
 {
     return current_moves;
+}
+
+int get_path_length()
+{
+    if (path_details == nullptr) {
+        return 0;
+    }
+    int* path_start = *(path_details - 33);
+    int* path_end = *(path_details - 31);
+    if (path_start != nullptr && path_end > path_start && path_end - path_start < 200) {
+        int totalCost = 1;
+        while (path_start < path_end) {
+            totalCost += -*path_start++ - 1;
+        }
+        return totalCost;
+    }
+    return 0;
 }
