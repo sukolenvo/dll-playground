@@ -25,30 +25,39 @@ long __stdcall hkReset(LPDIRECT3DDEVICE9 pDevice, D3DPRESENT_PARAMETERS* pPresen
     ImGui_ImplDX9_InvalidateDeviceObjects();
     long result = oReset(pDevice, pPresentationParameters);
     ImGui_ImplDX9_CreateDeviceObjects();
-    init = false;
     return result;
 }
 
+LPDIRECT3DDEVICE9 initDevice = nullptr;
+
 long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
 {
-    if (get_current_moves() == -1)
-    {
-        return oEndScene(pDevice);
-    }
     if (!init)
     {
+        init = true;
         D3DDEVICE_CREATION_PARAMETERS params;
         pDevice->GetCreationParameters(&params);
 
         ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
         ImGui::StyleColorsDark();
         ImGui::GetStyle().WindowBorderSize = 0;
         ImGui_ImplWin32_Init(params.hFocusWindow);
-        ImGui_ImplDX9_Init(pDevice);
-
-        init = true;
     }
-
+    if (initDevice != pDevice) {
+        initDevice = pDevice;
+        ImGui_ImplDX9_InvalidateDeviceObjects();
+        if (ImGui::GetIO().BackendRendererName != nullptr)
+        {
+            ImGui_ImplDX9_Shutdown();
+        }
+        ImGui_ImplDX9_Init(pDevice);
+        ImGui_ImplDX9_CreateDeviceObjects();
+    }
+    if (get_current_moves() == -1)
+    {
+        return oEndScene(pDevice);
+    }
     ImGui_ImplDX9_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
@@ -58,15 +67,18 @@ long __stdcall hkEndScene(LPDIRECT3DDEVICE9 pDevice)
     ImVec2 window_pos = ImVec2(offset * 1.08, io.DisplaySize.y - offset * 0.86);
     ImVec2 window_pos_pivot = ImVec2(0.0f, 1.0f);
     ImGui::SetNextWindowPos(window_pos, ImGuiCond_Always, window_pos_pivot);
-    ImGui::SetNextWindowBgAlpha(0.0F); // Transparent background
+    ImGui::SetNextWindowBgAlpha(0.7F); // Transparent background
     if (ImGui::Begin("Example: Simple overlay",
         nullptr,
         ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize
             | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
     {
-        if (get_path_length() > 0) {
+        if (get_path_length() > 0)
+        {
             ImGui::Text("%d / %d", get_path_length(), get_current_moves());
-        } else {
+        }
+        else
+        {
             ImGui::Text("%d", get_current_moves());
         }
     }

@@ -78,7 +78,7 @@ int get_path_length()
     }
     int* path_start = *(path_details - 33);
     int* path_end = *(path_details - 31);
-    if (path_start != nullptr && path_end > path_start && path_end - path_start < 200) {
+    if (path_start != nullptr && *path_start == 0 && path_end > path_start && path_end - path_start < 200) {
         int totalCost = 1;
         while (path_start < path_end) {
             totalCost += -*path_start++ - 1;
